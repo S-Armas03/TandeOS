@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">TandeOS</string>
+
+    <string name="consejos_Antes_de">
+        • Revisa el horario de suministro y corte de agua por medios oficiales o fuentes confiables.\n\n
+        • Prepara recipientes limpios y con tapa, como cubetas, garrafones, tambos, tinacos o cisternas.\n\n
+        • Separa el agua por uso: agua potable para beber y cocinar, y agua de uso general para limpieza, baño o WC.\n\n
+        • Lava ropa y trastes antes del corte para evitar consumir agua almacenada innecesariamente.\n\n
+        • Revisa fugas en llaves, WC, tinaco y cisterna para evitar desperdicios durante el tandeo.\n\n
+        • Llena tinacos y cisternas cuando haya presión, pero evita sobrellenarlos.\n\n
+        • Ten a la mano gel antibacterial, toallitas húmedas y cubetas pequeñas para higiene básica.\n\n
+        • Congela botellas con agua si tienes espacio, ya que ayudan a conservar alimentos fríos y después sirven como reserva.
+    </string>
+
+    <string name="consejos_Durante">
+        • Usa el agua por prioridad: beber, cocinar, higiene personal básica, WC y limpieza esencial.\n\n
+        • Evita usar manguera para lavar autos, patios o banquetas.\n\n
+        • Báñate rápido o utiliza baño de cubeta para reducir el consumo de agua.\n\n
+        • Reutiliza el agua cuando sea seguro, por ejemplo, el agua de enjuague para el WC o limpieza.\n\n
+        • No mezcles agua potable con agua de uso general. Marca los recipientes para evitar confusiones.\n\n
+        • Mantén tapados los recipientes para evitar polvo, insectos o contaminación.\n\n
+        • Cuida la higiene de manos antes de cocinar, comer o manipular agua potable.
+    </string>
+
+    <string name="consejos_Despues">
+        • Cuando regrese el servicio, deja correr el agua unos segundos si sale turbia o con sedimentos.\n\n
+        • Evita usar lavadora o calentador de inmediato si el agua viene con tierra, aire o color extraño.\n\n
+        • Lava y desinfecta los recipientes antes de volver a llenarlos.\n\n
+        • Rellena tus reservas poco a poco cuando vuelva el servicio, sin desperdiciar agua.\n\n
+        • Revisa tinacos y cisternas para asegurarte de que no tengan basura, mal olor, insectos o agua estancada.\n\n
+        • Si el agua sale turbia, con olor o color extraño, úsala solo para WC o limpieza. Para beber, usa agua de garrafón, hervida o desinfectada.
+    </string>
+
+    <string name="acerca_de">
+        Esta aplicación fue creada para ayudar a las personas a consultar información relacionada con los tandeos de agua en su zona.\n\n
+        Su objetivo es facilitar el acceso a horarios, recomendaciones y avisos importantes sobre el suministro de agua, especialmente durante periodos de escasez o distribución programada.\n\n
+
+        ¿Para qué sirve?\n\n
+        • Consultar información sobre tandeos de agua.\n\n
+        • Conocer recomendaciones antes, durante y después de los tandeos.\n\n
+        • Promover el uso responsable del agua en casa.\n\n
+        • Ayudar a organizar mejor el almacenamiento y consumo de agua.\n\n
+
+        Importante\n\n
+        • La información mostrada puede variar según la zona, el horario y las condiciones del servicio.\n\n
+        • Los horarios de suministro pueden cambiar por mantenimiento, fallas, baja presión o decisiones de las autoridades correspondientes.\n\n
+        • Se recomienda verificar siempre la información con fuentes oficiales o canales de comunicación de tu municipio, colonia o sistema operador de agua.\n\n
+
+        Uso responsable del agua\n\n
+        El agua almacenada debe usarse con cuidado, dando prioridad al consumo humano, la preparación de alimentos, la higiene personal y las necesidades básicas del hogar.\n\n
+        Pequeñas acciones como reparar fugas, reutilizar agua cuando sea seguro y evitar desperdicios pueden ayudar mucho durante los tandeos.\n\n
+
+        Privacidad\n\n
+        Esta app busca brindar información útil sin solicitar datos innecesarios. En caso de usar ubicación u otros permisos, estos deben emplearse únicamente para mejorar la consulta de información relacionada con tu zona.\n\n
+
+        Versión\n\n
+        Versión 1.0\n\n
+
+        Gracias por usar esta aplicación y contribuir al cuidado del agua.\n\n
+        Atte: Andrik, Adolfo y Serggi
+    </string>
+
+</resources>

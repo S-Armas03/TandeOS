@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo degradado -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="270"
+                android:centerColor="#BDF7FF"
+                android:endColor="#43DDEE"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- Arriba Círculos ahora a la derecha -->
+    <item
+        android:width="190dp"
+        android:height="190dp"
+        android:gravity="top|end"
+        android:right="-125dp"
+        android:top="-35dp">
+
+        <shape android:shape="oval">
+            <solid android:color="#7866D6FF" />
+        </shape>
+    </item>
+
+    <item
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="top|end"
+        android:right="-40dp"
+        android:top="-140dp">
+
+        <shape android:shape="oval">
+            <solid android:color="#7866D6FF" />
+        </shape>
+    </item>
+
+    <item
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="top|end"
+        android:right="-110dp"
+        android:top="-105dp">
+
+        <shape android:shape="oval">
+            <solid android:color="#7866D6FF" />
+        </shape>
+    </item>
+
+    <!-- Abajo Círculos ahora a la izquierda -->
+    <item
+        android:width="200dp"
+        android:height="200dp"
+        android:gravity="bottom|start"
+        android:left="-50dp"
+        android:bottom="-67dp">
+
+        <shape android:shape="oval">
+            <solid android:color="#4F69B7FF" />
+        </shape>
+    </item>
+
+    <item
+        android:width="180dp"
+        android:height="180dp"
+        android:gravity="bottom|start"
+        android:left="-20dp"
+        android:bottom="-125dp">
+
+        <shape android:shape="oval">
+            <solid android:color="#4F69B7FF" />
+        </shape>
+    </item>
+
+    <item
+        android:width="180dp"
+        android:height="180dp"
+        android:gravity="bottom|start"
+        android:left="-100dp"
+        android:bottom="-55dp">
+
+        <shape android:shape="oval">
+            <solid android:color="#4F69B7FF" />
+        </shape>
+    </item>
+
+</layer-list>

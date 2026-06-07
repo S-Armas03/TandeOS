@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tab_favoritos"
+        android:title="Favoritos"
+        android:icon="@drawable/ic_action_favoritos"/>
+    <item
+        android:id="@+id/tab_calendario"
+        android:title="Calendario"
+        android:icon="@drawable/ic_action_calendario"/>
+    <item
+        android:id="@+id/tab_mapa"
+        android:title="Mapa"
+        android:icon="@drawable/ic_action_distance"/>
+    <item
+        android:id="@+id/tab_consejos"
+        android:title="Consejos"
+        android:icon="@drawable/ic_action_consejos"/>
+    <item
+        android:id="@+id/tab_perfil"
+        android:title="Perfil"
+        android:icon="@drawable/ic_action_perfil"/>
+</menu>
