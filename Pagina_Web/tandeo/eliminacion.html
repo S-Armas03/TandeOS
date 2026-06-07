@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Tandeo - Tandeo System</title>
+    <link rel="stylesheet" href="eliminacion.css">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="../firebase-config.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🎯 Tandeo System</h2>
+                <p id="userName">Cargando...</p>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="../index.html" class="nav-link">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="registroTandeo.html" class="nav-link">
+                    <span class="icon">➕</span>
+                    <span>Registrar Tandeo</span>
+                </a>
+                <a href="edicionTandeo.html" class="nav-link">
+                    <span class="icon">✏️</span>
+                    <span>Editar Tandeo</span>
+                </a>
+                <a href="eliminacion.html" class="nav-link active">
+                    <span class="icon">🗑️</span>
+                    <span>Eliminar Tandeo</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <span class="icon">🚪</span>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Eliminar Tandeo</h1>
+                    <p>Seleccione un tandeo para eliminar permanentemente</p>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">👤</div>
+                    <span id="userEmail">usuario@email.com</span>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>Mis Tandeos</h3>
+                        <div class="search-box">
+                            <input type="text" id="searchInput" placeholder="Buscar tandeo...">
+                        </div>
+                    </div>
+                    
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Ubicación</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaTandeos">
+                                <tr><td colspan="6" class="text-center">Cargando tandeos...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Modal de confirmación -->
+                <div id="confirmModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Confirmar Eliminación</h3>
+                            <span class="modal-close" onclick="cerrarModal()">&times;</span>
+                        </div>
+                        <div class="modal-body">
+                            <p>¿Estás seguro de que deseas eliminar el tandeo <strong id="tandeoNombre"></strong>?</p>
+                            <p class="warning-text">Esta acción no se puede deshacer.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                            <button class="btn-danger" id="confirmarEliminar">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="eliminacion.js"></script>
+</body>
+</html>
