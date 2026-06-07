@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Tandeo - Tandeo System</title>
+    <link rel="stylesheet" href="registroTandeo.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="../firebase-config.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🎯 Tandeo System</h2>
+                <p id="userName">Cargando...</p>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="../index.html" class="nav-link">
+                    <span class="icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="registroTandeo.html" class="nav-link active">
+                    <span class="icon">➕</span>
+                    <span>Registrar Tandeo</span>
+                </a>
+                <a href="edicionTandeo.html" class="nav-link">
+                    <span class="icon">✏️</span>
+                    <span>Editar Tandeo</span>
+                </a>
+                <a href="eliminacion.html" class="nav-link">
+                    <span class="icon">🗑️</span>
+                    <span>Eliminar Tandeo</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn-logout">
+                    <span class="icon">🚪</span>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Registrar Nuevo Tandeo</h1>
+                    <p>Complete los datos para crear un nuevo tandeo</p>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">👤</div>
+                    <span id="userEmail">usuario@email.com</span>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="form-container">
+                    <form id="registroTandeoForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nombre">Nombre del Tandeo *</label>
+                                <input type="text" id="nombre" name="nombre" required placeholder="Ej: Reunión de ventas">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fecha">Fecha *</label>
+                                <input type="date" id="fecha" name="fecha" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="horaInicio">Hora de Inicio *</label>
+                                <input type="time" id="horaInicio" name="horaInicio" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="horaFin">Hora de Fin *</label>
+                                <input type="time" id="horaFin" name="horaFin" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ubicacion">Ubicación *</label>
+                                <input type="text" id="ubicacion" name="ubicacion" required placeholder="Ej: Sala de juntas, Online, Oficina">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estado">Estado *</label>
+                                <select id="estado" name="estado" required>
+                                    <option value="activo">Activo</option>
+                                    <option value="pendiente">Pendiente</option>
+                                    <option value="cancelado">Cancelado</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="descripcion">Descripción</label>
+                                <textarea id="descripcion" name="descripcion" rows="4" placeholder="Descripción detallada del tandeo..."></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="participantes">Participantes</label>
+                                <input type="text" id="participantes" name="participantes" placeholder="Ej: Juan, María, Pedro (separados por comas)">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+                            <button type="submit" class="btn-primary">Registrar Tandeo</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Mensaje de éxito -->
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>¡Tandeo Registrado!</h3>
+                    <p>El tandeo ha sido creado exitosamente</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="registroTandeo.js"></script>
+</body>
+</html>
