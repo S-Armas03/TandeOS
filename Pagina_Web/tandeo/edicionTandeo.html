@@ -3,46 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Tandeo - Tandeo System</title>
+    <title>Editar Tandeo</title>
     <link rel="stylesheet" href="edicionTandeo.css">
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="../firebase-config.js"></script>
 </head>
 <body>
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>🎯 Tandeo System</h2>
-                <p id="userName">Cargando...</p>
+                <h2>💧 Tandeo System</h2>
+                <p id="adminName">Cargando...</p>
             </div>
-            
             <nav class="nav-menu">
-                <a href="../index.html" class="nav-link">
-                    <span class="icon">📊</span>
-                    <span>Dashboard</span>
-                </a>
-                <a href="registroTandeo.html" class="nav-link">
-                    <span class="icon">➕</span>
-                    <span>Registrar Tandeo</span>
-                </a>
-                <a href="edicionTandeo.html" class="nav-link active">
-                    <span class="icon">✏️</span>
-                    <span>Editar Tandeo</span>
-                </a>
-                <a href="eliminacion.html" class="nav-link">
-                    <span class="icon">🗑️</span>
-                    <span>Eliminar Tandeo</span>
-                </a>
+                <a href="../index.html" class="nav-link">📊 Dashboard</a>
+                <a href="registroTandeo.html" class="nav-link">➕ Registrar Tandeo</a>
+                <a href="edicionTandeo.html" class="nav-link active">✏️ Editar Tandeo</a>
+                <a href="eliminacion.html" class="nav-link">🗑️ Eliminar Tandeo</a>
             </nav>
-            
-            <div class="sidebar-footer">
-                <button id="logoutBtn" class="btn-logout">
-                    <span class="icon">🚪</span>
-                    <span>Cerrar Sesión</span>
-                </button>
-            </div>
         </aside>
 
         <main class="main-content">
@@ -53,12 +29,14 @@
                 </div>
                 <div class="user-info">
                     <div class="user-avatar" id="userAvatar">👤</div>
-                    <span id="userEmail">usuario@email.com</span>
+                    <div>
+                        <div id="adminNameHeader" class="user-name">Cargando...</div>
+                        <div id="adminEmail" class="user-email">admin@tandeos.com</div>
+                    </div>
                 </div>
             </header>
 
             <div class="content">
-                <!-- Selector de tandeo -->
                 <div class="selector-container">
                     <label for="tandeoSelect">Seleccionar Tandeo a editar:</label>
                     <select id="tandeoSelect" class="tandeo-select">
@@ -66,30 +44,14 @@
                     </select>
                 </div>
 
-                <!-- Formulario de edición -->
                 <div class="form-container" id="editFormContainer" style="display: none;">
                     <form id="editarTandeoForm">
                         <input type="hidden" id="tandeoId">
                         
                         <div class="form-grid">
                             <div class="form-group">
-                                <label for="nombre">Nombre del Tandeo *</label>
-                                <input type="text" id="nombre" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="fecha">Fecha *</label>
-                                <input type="date" id="fecha" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="horaInicio">Hora de Inicio *</label>
-                                <input type="time" id="horaInicio" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="horaFin">Hora de Fin *</label>
-                                <input type="time" id="horaFin" required>
+                                <label for="zona">Zona de Tandeo *</label>
+                                <input type="text" id="zona" required>
                             </div>
 
                             <div class="form-group">
@@ -98,22 +60,21 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="fechaInicio">Fecha de Inicio *</label>
+                                <input type="text" id="fechaInicio" required readonly style="background:#f5f5f5;">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="fechaFinal">Fecha de Finalización *</label>
+                                <input type="text" id="fechaFinal" required readonly style="background:#f5f5f5;">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="estado">Estado *</label>
                                 <select id="estado" required>
-                                    <option value="activo">Activo</option>
-                                    <option value="pendiente">Pendiente</option>
-                                    <option value="cancelado">Cancelado</option>
+                                    <option value="Activo">Activo</option>
+                                    <option value="Pasado">Completado</option>
                                 </select>
-                            </div>
-
-                            <div class="form-group full-width">
-                                <label for="descripcion">Descripción</label>
-                                <textarea id="descripcion" rows="4"></textarea>
-                            </div>
-
-                            <div class="form-group full-width">
-                                <label for="participantes">Participantes</label>
-                                <input type="text" id="participantes">
                             </div>
                         </div>
 
@@ -121,7 +82,7 @@
                             <button type="button" class="btn-secondary" onclick="cancelarEdicion()">Cancelar</button>
                             <button type="submit" class="btn-primary">Guardar Cambios</button>
                         </div>
-                    </form>
+                                       </form>
                 </div>
 
                 <div id="successMessage" class="success-message" style="display: none;">
@@ -133,6 +94,6 @@
         </main>
     </div>
 
-    <script src="edicionTandeo.js"></script>
+    <script type="module" src="edicionTandeo.js"></script>
 </body>
 </html>

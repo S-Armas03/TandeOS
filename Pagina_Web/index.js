@@ -1,101 +1,82 @@
-// dashboard.js
-let currentUser = null;
+import { db } from './firebase-config.js';
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-// Verificar autenticación
-firebase.auth().onAuthStateChanged(async (user) => {
-    if (!user) {
+// Verificar sesión
+function verificarSesion() {
+    const session = localStorage.getItem('tandeoSession') || sessionStorage.getItem('tandeoSession');
+    
+    if (!session) {
         window.location.href = 'login-registro/login.html';
-        return;
+        return null;
     }
-    
-    currentUser = user;
-    
-    // Mostrar información del usuario
-    document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
-    document.getElementById('userEmail').textContent = user.email;
-    document.getElementById('userAvatar').textContent = user.email.charAt(0).toUpperCase();
-    
-    // Cargar estadísticas
-    await cargarEstadisticas();
-    await cargarUltimosTandeos();
-});
+    return JSON.parse(session);
+}
+
+function mostrarUsuario(session) {
+    if (session) {
+        const nombre = session.nombre || session.email.split('@')[0];
+        document.getElementById('userName').textContent = nombre;
+        document.getElementById('userNameHeader').textContent = nombre;
+        document.getElementById('userEmail').textContent = session.email;
+        document.getElementById('userAvatar').textContent = nombre.charAt(0).toUpperCase();
+    }
+}
 
 // Cargar estadísticas
 async function cargarEstadisticas() {
     try {
-        const tandeosRef = firebase.firestore().collection('tandeos');
-        const snapshot = await tandeosRef.where('userId', '==', currentUser.uid).get();
-        
+        const snapshot = await getDocs(collection(db, "Tandeos"));
         const tandeos = [];
-        snapshot.forEach(doc => tandeos.push({ id: doc.id, ...doc.data() }));
+        snapshot.forEach(doc => tandeos.push(doc.data()));
         
-        const total = tandeos.length;
-        const activos = tandeos.filter(t => t.estado === 'activo').length;
-        const pendientes = tandeos.filter(t => t.estado === 'pendiente').length;
-        
-        // Contar tandeos de hoy
-        const hoy = new Date().toISOString().split('T')[0];
-        const hoyCount = tandeos.filter(t => t.fecha === hoy).length;
-        
-        // Actualizar UI
-        document.getElementById('totalTandeos').textContent = total;
-        document.getElementById('tandeosActivos').textContent = activos;
-        document.getElementById('tandeosPendientes').textContent = pendientes;
-        document.getElementById('tandeosHoy').textContent = hoyCount;
-        
+        document.getElementById('totalTandeos').textContent = tandeos.length;
+        document.getElementById('tandeosActivos').textContent = tandeos.filter(t => t.Estado !== 'Pasado').length;
+        document.getElementById('tandeosCompletados').textContent = tandeos.filter(t => t.Estado === 'Pasado').length;
     } catch (error) {
-        console.error('Error al cargar estadísticas:', error);
+        console.error("Error:", error);
     }
 }
 
-// Cargar últimos 5 tandeos
-async function cargarUltimosTandeos() {
+// Cargar tandeos
+async function cargarTandeos() {
     try {
-        const snapshot = await firebase.firestore()
-            .collection('tandeos')
-            .where('userId', '==', currentUser.uid)
-            .orderBy('fechaCreacion', 'desc')
-            .limit(5)
-            .get();
-        
-        const tbody = document.getElementById('ultimosTandeos');
+        const snapshot = await getDocs(collection(db, "Tandeos"));
+        const tbody = document.getElementById('tablaTandeos');
         
         if (snapshot.empty) {
-            tbody.innerHTML = '<tr><td colspan="5" class="text-center">No hay tandeos registrados</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5">No hay tandeos</td></tr>';
             return;
         }
         
         tbody.innerHTML = '';
         snapshot.forEach(doc => {
-            const tandeo = doc.data();
+            const t = doc.data();
             const row = tbody.insertRow();
-            
-            // Determinar clase del badge según estado
-            let badgeClass = 'badge-success';
-            if (tandeo.estado === 'pendiente') badgeClass = 'badge-warning';
-            if (tandeo.estado === 'cancelado') badgeClass = 'badge-danger';
-            
+            let clase = t.Estado === 'Pasado' ? 'badge-success' : 'badge-warning';
             row.innerHTML = `
-                <td>${tandeo.nombreTandeo || 'Sin nombre'}</td>
-                <td>${tandeo.fecha || 'N/A'}</td>
-                <td>${tandeo.horaInicio || 'N/A'}</td>
-                <td>${tandeo.ubicacion || 'N/A'}</td>
-                <td><span class="badge ${badgeClass}">${tandeo.estado || 'activo'}</span></td>
+                <td>${t.Zona_Tandeo || 'N/A'}</td>
+                <td>${t.Ubicacion || 'N/A'}</td>
+                <td>${t.Fecha_Inicio || 'N/A'}</td>
+                <td>${t.Fecha_Final || 'N/A'}</td>
+                <td><span class="badge ${clase}">${t.Estado || 'Activo'}</span></td>
             `;
         });
-        
     } catch (error) {
-        console.error('Error al cargar tandeos:', error);
-        document.getElementById('ultimosTandeos').innerHTML = '<tr><td colspan="5" class="text-center">Error al cargar datos</td></tr>';
+        console.error("Error:", error);
     }
 }
 
 // Cerrar sesión
-document.getElementById('logoutBtn').addEventListener('click', async () => {
-    try {
-        await firebase.auth().signOut();
-        window.location.href = 'login-registro/login.html';
-    } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-    }
+document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('tandeoSession');
+    sessionStorage.removeItem('tandeoSession');
+    window.location.href = 'login-registro/login.html';
 });
+
+// Inicializar
+const session = verificarSesion();
+if (session) {
+    mostrarUsuario(session);
+    cargarEstadisticas();
+    cargarTandeos();
+}
