@@ -1,53 +1,71 @@
-// login.js
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+import { db } from '../firebase-config.js';
+import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+// Admin por defecto
+const DEFAULT_ADMIN = {
+    email: "admin@tandeos.com",
+    password: "admin123",
+    nombre: "Administrador"
+};
+
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember').checked;
     
-    // Obtener usuario registrado
-    const registeredUser = JSON.parse(localStorage.getItem('user'));
-    
-    // Validar credenciales
-    if (!registeredUser) {
-        alert('No hay cuenta registrada. Por favor regístrate primero.');
+    // Verificar admin por defecto
+    if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
+        const sessionData = {
+            email: DEFAULT_ADMIN.email,
+            nombre: DEFAULT_ADMIN.nombre,
+            loggedIn: true
+        };
+        
+        if (remember) {
+            localStorage.setItem('tandeoSession', JSON.stringify(sessionData));
+        } else {
+            sessionStorage.setItem('tandeoSession', JSON.stringify(sessionData));
+        }
+        
+        alert("Bienvenido Administrador");
+        window.location.href = '../index.html';
         return;
     }
     
-    if (email === registeredUser.email && password === registeredUser.password) {
-        // Login exitoso
-        if (remember) {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('currentUser', JSON.stringify({
-                name: registeredUser.name,
-                email: registeredUser.email
-            }));
+    // Buscar en Firestore
+    try {
+        const q = query(collection(db, "Usuarios_Administradores"), where("email", "==", email));
+        const querySnapshot = await getDocs(q);
+        
+        if (!querySnapshot.empty) {
+            const userData = querySnapshot.docs[0].data();
+            
+            if (userData.password === password) {
+                const sessionData = {
+                    email: email,
+                    nombre: userData.nombre,
+                    loggedIn: true
+                };
+                
+                if (remember) {
+                    localStorage.setItem('tandeoSession', JSON.stringify(sessionData));
+                } else {
+                    sessionStorage.setItem('tandeoSession', JSON.stringify(sessionData));
+                }
+                
+                alert("Bienvenido " + userData.nombre);
+                window.location.href = '../index.html';
+            } else {
+                alert("Contraseña incorrecta");
+            }
         } else {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            sessionStorage.setItem('currentUser', JSON.stringify({
-                name: registeredUser.name,
-                email: registeredUser.email
-            }));
+            alert("Usuario no encontrado");
         }
         
-        // Mostrar mensaje de éxito
-        document.getElementById('successMessage').style.display = 'block';
-        
-        // Redirigir al index después de 2 segundos
-        setTimeout(() => {
-            window.location.href = '../index.html';
-        }, 2000);
-        
-    } else {
-        alert('Email o contraseña incorrectos');
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error de conexión: " + error.message);
     }
-});
-
-// Toggle password visibility
-document.getElementById('passwordToggle').addEventListener('click', function() {
-    const passwordInput = document.getElementById('password');
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-    this.classList.toggle('active');
 });

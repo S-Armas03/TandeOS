@@ -3,46 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Tandeo - Tandeo System</title>
+    <title>Eliminar Tandeo</title>
     <link rel="stylesheet" href="eliminacion.css">
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="../firebase-config.js"></script>
 </head>
 <body>
     <div class="app-container">
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h2>🎯 Tandeo System</h2>
-                <p id="userName">Cargando...</p>
+                <h2>💧 Tandeo System</h2>
+                <p id="adminName">Cargando...</p>
             </div>
-            
             <nav class="nav-menu">
-                <a href="../index.html" class="nav-link">
-                    <span class="icon">📊</span>
-                    <span>Dashboard</span>
-                </a>
-                <a href="registroTandeo.html" class="nav-link">
-                    <span class="icon">➕</span>
-                    <span>Registrar Tandeo</span>
-                </a>
-                <a href="edicionTandeo.html" class="nav-link">
-                    <span class="icon">✏️</span>
-                    <span>Editar Tandeo</span>
-                </a>
-                <a href="eliminacion.html" class="nav-link active">
-                    <span class="icon">🗑️</span>
-                    <span>Eliminar Tandeo</span>
-                </a>
+                <a href="../index.html" class="nav-link">📊 Dashboard</a>
+                <a href="registroTandeo.html" class="nav-link">➕ Registrar Tandeo</a>
+                <a href="edicionTandeo.html" class="nav-link">✏️ Editar Tandeo</a>
+                <a href="eliminacion.html" class="nav-link active">🗑️ Eliminar Tandeo</a>
             </nav>
-            
-            <div class="sidebar-footer">
-                <button id="logoutBtn" class="btn-logout">
-                    <span class="icon">🚪</span>
-                    <span>Cerrar Sesión</span>
-                </button>
-            </div>
         </aside>
 
         <main class="main-content">
@@ -53,14 +29,17 @@
                 </div>
                 <div class="user-info">
                     <div class="user-avatar" id="userAvatar">👤</div>
-                    <span id="userEmail">usuario@email.com</span>
+                    <div>
+                        <div id="adminNameHeader" class="user-name">Cargando...</div>
+                        <div id="adminEmail" class="user-email">admin@tandeos.com</div>
+                    </div>
                 </div>
             </header>
 
             <div class="content">
                 <div class="table-container">
                     <div class="table-header">
-                        <h3>Mis Tandeos</h3>
+                        <h3>📋 Lista de Tandeos</h3>
                         <div class="search-box">
                             <input type="text" id="searchInput" placeholder="Buscar tandeo...">
                         </div>
@@ -70,10 +49,10 @@
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha</th>
-                                    <th>Hora</th>
+                                    <th>Zona</th>
                                     <th>Ubicación</th>
+                                    <th>Fecha Inicio</th>
+                                    <th>Fecha Fin</th>
                                     <th>Estado</th>
                                     <th>Acción</th>
                                 </tr>
@@ -85,11 +64,10 @@
                     </div>
                 </div>
 
-                <!-- Modal de confirmación -->
                 <div id="confirmModal" class="modal" style="display: none;">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3>Confirmar Eliminación</h3>
+                            <h3>⚠️ Confirmar Eliminación</h3>
                             <span class="modal-close" onclick="cerrarModal()">&times;</span>
                         </div>
                         <div class="modal-body">
@@ -106,6 +84,6 @@
         </main>
     </div>
 
-    <script src="eliminacion.js"></script>
+    <script type="module" src="eliminacion.js"></script>
 </body>
 </html>
